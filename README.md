@@ -2,7 +2,4 @@
 연습
 <p>연습용</p>
 오늘은 월요일
-fdsafdsafdsafdsa
-fdsafdsafdsa
-fdsafdsa
 오늘은 월요일
