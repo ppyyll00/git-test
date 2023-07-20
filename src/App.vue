@@ -23,6 +23,7 @@
         {{ todo.subject }}
       </div>
     </div>
+    <div v-if="hasErrer">Errer</div>
   </div>
 </template>
 <script>
@@ -35,16 +36,25 @@ export default {
     ])
 
     const onsubmit = ( ) => {
-      todos.value.push({
+      if (todo.value === '') {
+        hasErrer.value = true
+      } else {
+        todos.value.push({
         id:Date.now(),
         subject:todo.value
-      })
+        });
+        hasErrer.value = false;
+      }
+      
     }
+
+    const hasErrer = ref(false)
 
     return{
       todo,
       todos,
-      onsubmit
+      onsubmit,
+      hasErrer
     }
   }
 }
