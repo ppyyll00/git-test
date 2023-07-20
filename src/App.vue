@@ -1,53 +1,51 @@
 <template>
-  <div class="container">
+  <div>
     <h2>To-Do List</h2>
     <form
-    class="d-flex"
-    @submit.prevent="onSubmit" 
+      @submit.prevent="onsubmit"
     >
-      <div class="flex-grow-1 mr-2"> 
-        <input
-          class="form-control "
-          type="text"
-          v-model="todo"
-          placeholder="Type new to-do"
-        >
-      </div>
-      <div>
-        <button
-        class="btn btn-primary"
-        type="submit"
-        >
+      <input
+        placeholder="to do list"
+        v-model="todo"
+      >
+      <button
+      type="submit"
+      >
         Add
-        </button>
-      </div>      
+      </button>
     </form>
-    {{ todos }}
+    <div
+      v-for="todo in todos" 
+      key="todo.id"
+      class="card mt-2"
+    >
+      <div class="card-body">
+        {{ todo.subject }}
+      </div>
+    </div>
   </div>
-  
-  
 </template>
-  
 <script>
 import { ref } from 'vue'
 
 export default {
   setup() {
-    const todo = ref(' ');
-    const todos = ref([])
+    const todo = ref('')
+    const todos = ref([
+    ])
 
-    const onSubmit = ( ) => {
+    const onsubmit = ( ) => {
       todos.value.push({
-        id: Date.now(),
-        subject: todo.value
-      });
-    };
+        id:Date.now(),
+        subject:todo.value
+      })
+    }
 
-    return {
+    return{
       todo,
-      onSubmit,
       todos,
-    };
+      onsubmit
+    }
   }
 }
 </script>
