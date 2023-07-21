@@ -1,9 +1,9 @@
 <template>
   <div>
     <h2>To-Do List</h2>
-    <TodoSimpleForm />
+    <TodoSimpleForm @add-todo="addTodo" />
 
-    <div v-if="todos.length">
+    <div v-if="!todos.length">
       추가된 ToDo List가 없습니다.
     </div>
     <div
@@ -42,22 +42,12 @@ export default {
   components: {
     TodoSimpleForm
   },
-  setup() {
+  setup( ) {
     const todo = ref('')
     const todos = ref([ ])
 
-    const onsubmit = ( ) => {
-      if (todo.value === '') {
-        hasErrer.value = true
-      } else {
-        todos.value.push({
-        id:Date.now(),
-        subject:todo.value,
-        completed: false, /*완료가 되어있는지 안되어있는지, 첨엔 완료안되어있기 때문에 false로 설정*/
-        });
-        hasErrer.value = false;
-        todo.value = ''
-      }      
+    const addTodo = (todo) => {
+      todos.value.push(todo);
     }
 
     const deleteTodo = (index) => {
@@ -67,7 +57,7 @@ export default {
     return{
       todo,
       todos,
-      onsubmit,
+      addTodo,
       deleteTodo,
     }
   }

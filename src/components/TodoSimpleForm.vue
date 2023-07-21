@@ -1,6 +1,6 @@
 <template>
   <form
-      @submit.prevent="onsubmit"
+      @submit.prevent="onsubmit" 
     >
       <input
         placeholder="to do list"
@@ -18,7 +18,7 @@
 <script>
 import { ref } from 'vue'
 export default {
-  setup() {
+  setup(props, context) {
     const todo = ref('')
     const hasErrer = ref(false)
 
@@ -26,10 +26,10 @@ export default {
       if (todo.value === '') {
         hasErrer.value = true
       } else {
-        todos.value.push({
-        id:Date.now(),
-        subject:todo.value,
-        completed: false, /*완료가 되어있는지 안되어있는지, 첨엔 완료안되어있기 때문에 false로 설정*/
+        context.emit('add-todo' , { /*add-todo가 시작되면 데이터를 부모한테 보내준다.*/
+          id:Date.now(),
+          subject:todo.value,
+          completed: false,
         });
         hasErrer.value = false;
         todo.value = ''
