@@ -1,24 +1,27 @@
 <template>
-  <div>
+  <div class="container">
     <h2>To-Do List</h2>
     <TodoSimpleForm @add-todo="addTodo" />
 
     <div v-if="!todos.length">
-      추가된 ToDo List가 없습니다.
+      추가된 Todo가 없습니다
     </div>
-    <div
-      v-for="(todo,index) in todos" 
-      key="todo.id"
+    <div 
+      v-for="(todo, index) in todos"
+      :key="todo.id"
       class="card mt-2"
     >
-      <div class="card-body d-flex align-items-center">
-        <div clsss="form-check flex-grow-1">
+      <div class="card-body p-2 d-flex align-items-center">
+        <div class="form-check flex-grow-1">
           <input 
             class="form-check-input" 
             type="checkbox"
-            v-model="todos.completed"
+            v-model="todo.completed"
           >
-          <label class="form-check-label">
+          <label 
+            class="form-check-label"
+            :class="{ todo: todo.completed }"
+          >
             {{ todo.subject }}
           </label>
         </div>
@@ -27,7 +30,7 @@
             class="btn btn-danger btn-sm"
             @click="deleteTodo(index)"
           >
-            delete
+            Delete
           </button>
         </div>
       </div>
@@ -42,9 +45,8 @@ export default {
   components: {
     TodoSimpleForm
   },
-  setup( ) {
-    const todo = ref('')
-    const todos = ref([ ])
+  setup() {
+    const todos = ref([])
 
     const addTodo = (todo) => {
       todos.value.push(todo);
@@ -55,7 +57,6 @@ export default {
     }
 
     return{
-      todo,
       todos,
       addTodo,
       deleteTodo,
