@@ -11,7 +11,8 @@
             type="checkbox"
             :value="todo.completed"
             @change="toggleTodo(index)"            
-          ><!-- @change = 인풋값이 변경될때마다 toggleTodo라는 함수를 실행시킴, index는 todos fmf 브이포 로 돌릴떄 나오는 index다 -->
+          ><!-- @change = 인풋값이 변경될때마다 toggleTodo라는 함수를 실행시킴, index는 todos 를 브이포 로 돌릴떄 나오는 index다 -->
+          <!-- :value는 인풋값을 todo.vompleted로 가지겠다는 뜻이다. -->
           <label 
             class="form-check-label"
             :class="{ todo: todo.completed }"
@@ -23,7 +24,7 @@
           <button 
             class="btn btn-danger btn-sm"
             @click="deleteTodo(index)"
-          >
+          > <!-- 버튼을 클릭하면 deleteTodo라는 함수를 실행시켜 index를 부모한테 전달한다. -->
             Delete
           </button>
         </div>
@@ -44,8 +45,13 @@ export default {
       context.emit('toggle-todo', index) /*인풋값이 변경될때 input값을 'toggle-todo'이름으로 부모한테 넘기겠다. */
     }
 
+    const deleteTodo = (index) => {
+      context.emit('delete-todo', index)
+    }
+
     return {
       toggleTodo,
+      deleteTodo
     }
   }
 }

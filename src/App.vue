@@ -6,7 +6,7 @@
     <div v-if="!todos.length">
       추가된 Todo가 없습니다
     </div>
-    <TodosForm :todos="todos" @toggle-todo="toggleTodo"/> <!--props를 이용하여 부모에 있는 "todos"를 todos 이름으로 자식컴포넌트(TodosForm) 에 전달-->
+    <TodosForm :todos="todos" @toggle-todo="toggleTodo" @delete-todo="deleteTodo"/> <!--props를 이용하여 부모에 있는 "todos"를 todos 이름으로 자식컴포넌트(TodosForm) 에 전달-->
     <!-- 자식한테 'toggle-todo'로 받은 index를 toggleTodo라는 함수에 적용시킨다. -->
     
   </div>
